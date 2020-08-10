@@ -16,7 +16,10 @@ class Application extends Component {
     handleClick = () => {
         this.setState({ count: this.state.count + 1 });
     }
-
+    resetCount(e) {
+        this.setState({ count: 0 });
+        this.setState({ overTen: false });
+    }
     componentDidUpdate(props, state) {
         // Gets call every time the component updates!!!!!!
         //console.log("Update from", state, "to", this.state);
@@ -34,9 +37,12 @@ class Application extends Component {
         return (
             <div>
                 <h1>You clicked the button {count} times</h1>
-                <HighScore />
+                <HighScore
+                    overTen={this.state.overTen}
+                    onReset={this.resetCount}
+                />
 
-                <span><button onClick={(e) => this.handleClick()}>
+                <span><button onClick={() => this.handleClick()}>
                     Click me
                 </button></span>
             </div>
